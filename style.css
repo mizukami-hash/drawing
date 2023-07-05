@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+canvas {
+  margin: 50px 0 0 50px;
+  border: 1px solid;
+  cursor: crosshair;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+#eraser {
+  margin-left: 100px;
+}
