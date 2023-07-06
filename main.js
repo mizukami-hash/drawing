@@ -7,12 +7,15 @@
   const clear = document.querySelector("#clear");
   const eraser = document.querySelector("#eraser");
   const eraserWidth = document.querySelector("#eraser-width");
+  const add = document.querySelector("#add");
+  const save = document.querySelector("#save");
+  const gallery = document.querySelector("#gallery");
 
   let startX;
   let startY;
   let x;
   let y;
-  const marginWidth = 50 + 1;
+  const marginWidth = 50 + 1; /*margin + border*/
   let ctx;
   let isDrawing = false;
 
@@ -23,6 +26,7 @@
     ctx = canvas.getContext("2d");
   }
   draw();
+  //   canvas.src = localStorage.getItem('key');
 
   canvas.addEventListener("mousedown", (e) => {
     isDrawing = true;
@@ -59,7 +63,7 @@
     // console.log("changed");
     ctx.strokeStyle = penColor.value;
   });
-
+  // ペンの太さ
   penWidth.addEventListener("change", () => {
     ctx.lineWidth = penWidth.value;
   });
@@ -72,7 +76,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   });
-
+  // 消しゴム機能
   eraser.addEventListener("click", () => {
     ctx.strokeStyle = "#FFFFFF";
   });
@@ -81,4 +85,37 @@
     ctx.strokeStyle = "#FFFFFF";
     ctx.lineWidth = eraserWidth.value;
   });
+
+  // 保存機能
+  add.addEventListener("click", () => {
+    // ギャラリーに追加
+    let img = document.createElement("img");
+    img.setAttribute("width", "100");
+    img.setAttribute("height", "50");
+    img.src = canvas.toDataURL();
+    img.classList.add("thumbnail");
+    gallery.appendChild(img);
+    // ダウンロード
+    // ダウンロード属性が設定されたaタグをクリックした場合、コンテンツをファイルに保存する
+    // const base64 = canvas.toDataURL({
+    //     format:'png'
+    // });
+    // const link =document.createElement('a');
+    // document.body.appendChild(link);
+    // link.href = base64;
+    // link.download = 'picture.png';
+    // save.appendChild(link);
+    // link.click();
+    // // URL.revokeObjectURL(url);
+    // link.remove();
+    //   });
+  });
+
+  save.addEventListener("click", () => {
+    localStorage.setItem("canvas", canvas.toDataURL());
+    console.log(localStorage);
+  });
+  let img = new Image();
+  img.src = localStorage.getItem("canvas");
+  img.onload = ctx.drawImage(img, 0, 0);
 }

@@ -12,3 +12,7 @@ p {
 #eraser {
   margin-left: 100px;
 }
+.thumbnail{
+    border:solid #999;
+    margin-right:5px;
+}
