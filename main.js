@@ -140,7 +140,8 @@
     createImg.src = canvas.toDataURL();
     createImg.classList.add("thumbnail");
 
-    // ダウンロード機能
+    // ダウンロード機能(1/2)=================================
+    // 囲ってある範囲内のチェックお願いします
     a = document.createElement("a");
     a.href = canvas
       .toDataURL()
@@ -149,6 +150,7 @@
     a.download = "image.png";
     document.querySelector("#gallery").appendChild(a.appendChild(createImg));
     // a.click();
+    // =====================================================
 
     obj = [
       // id:Math.floor(Math.random()*10000),
@@ -173,6 +175,8 @@
         currentIndex = index;
         thumbnails[currentIndex].classList.add("active");
       });
+      // ダウンロード機能(2/2)=================================
+      // 囲ってある範囲内のチェックお願いします
       item.addEventListener("dblclick", () => {
         if (!confirm("ダウンロードしますか？")) {
           return;
@@ -180,6 +184,7 @@
           a.click();
         }
       });
+      // =====================================================
     });
     // localStorage.setItem("canvas", JSON.stringify(obj));
   }
@@ -196,7 +201,7 @@
   img.src = localStorage.getItem("canvas");
   ctx.drawImage(img, 0, 0);
 }
-
+// メモ
 // {
 //   const canvas = document.querySelector("#canvas");
 //   const penColor = document.querySelector("#pen-color");
