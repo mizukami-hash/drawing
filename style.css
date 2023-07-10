@@ -1,18 +1,85 @@
 @charset "utf-8";
+* {
+  box-sizing: border-box;
+}
 
 canvas {
   margin: 50px 0 0 50px;
   border: 1px solid;
   cursor: crosshair;
+  display: block;
 }
+
 p {
-  margin: 0;
+  margin-bottom: 0;
   padding: 0;
 }
 #eraser {
   margin-left: 100px;
 }
-.thumbnail{
-    border:solid #999;
-    margin-right:5px;
+.thumbnail {
+  border: solid #999;
+  margin-right: 7px;
+}
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.color {
+  margin: 0 5px;
+  padding: 14px;
+  line-height: 100%;
+  cursor: pointer;
+}
+#red {
+  background-color: red;
+}
+#black {
+  background-color: black;
+}
+#yellow {
+  background-color: yellow;
+}
+#blue {
+  background-color: blue;
+}
+.active {
+  border: solid red;
+}
+
+.pen-width {
+  text-align: center;
+  align-items: center;
+}
+
+.width {
+  /* background-color:alice; */
+  margin: 4px 5px;
+  padding: 5px 9px 2px;
+  text-align: center;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 100%;
+  cursor: pointer;
+}
+#one {
+  border: 1px solid #999;
+  align-items: center;
+}
+#three {
+  border: 3px solid #999;
+}
+#five {
+  border: 5px solid #999;
+}
+
+.selected {
+  border: solid orange 2px;
+}
+.width-selected {
+  background-color: #d6c8c8;
 }

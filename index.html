@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
-    <canvas width="600" height="300" id="canvas"></canvas>
-    <p>
-        <p>ペン</p>
-        <select id="pen-color">
-            <option value="black">黒</option>
-            <option value="red">赤</option>
-            <option value="blue">青</option>
-            <option value="yellow">黄</option>
-        </select>
-        <select id="pen-width">
-            <option value="1">細</option>
-            <option value="3">中</option>
-            <option value="4">太</option>
+  </head>
+  <body>
+    <canvas width="300" height="150" id="canvas"></canvas>
+    <button id="save">保存</button>
+    <button id="clear">削除</button>
+    <!-- <p>色</p> -->
+    <ul id="pen-color">
+      <li class="color" id="black"></li>
+      <li class="color" id="red"></li>
+      <li class="color" id="yellow"></li>
+      <li class="color" id="blue"></li>
+    </ul>
+    <!-- <p>太さ</p> -->
+    <ul id="pen-width">
+      <li class="width" id="one">1px</li>
+      <li class="width" id="three">3px</li>
+      <li class="width" id="five">5px</li>
+    </ul>
 
-            <p>消しゴム</p>
-            <input type="button" id="eraser" value="消しゴム">
-            <select id="eraser-width">
-                <option value="2">細</option>
-                <option value="10">太</option>
-            <input type="button" id="clear" value="消去">
-            <input type="button" id="add" value="ギャラリーに追加">
-            <input type="button" id="save" value="保存">
-            <div id="gallery">        
-            </div>
-            
-            <!-- <input type="color"> -->
-        </select>
-    </p>
+    <button id="small-eraser">消しゴム小</button>
+    <button id="big-eraser">消しゴム大</button>
+    <button id="add">追加</button>
 
-    
-    <script src ="main.js"></script>
-</body>
+    <div id="gallery">
+      <!-- <img id="ex" class="active" > -->
+      <!-- <button id ="add">追加</button>   -->
+    </div>
+
+    <script src="main.js"></script>
+  </body>
 </html>
