@@ -17,7 +17,10 @@
   let ctx;
   let isDrawing = false;
   let currentIndex = 0;
+  let selectedIndex = 0;
+  let galleryIndex = 0;
   let a;
+  let index = 0;
 
   let obj;
 
@@ -99,23 +102,24 @@
   clear.addEventListener("click", () => {
     if (!confirm("全て消去しますか?")) {
       return;
-    } else {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      localStorage.removeItem("canvas");
     }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    localStorage.removeItem("canvas");
   });
 
   //   色選択の項目にCSSを適用
   const colors = document.querySelectorAll("#pen-color > li");
   colors.forEach((color, index) => {
-    if (index === currentIndex) {
+    if (index === selectedIndex) {
+      // console.log(currentIndex);
       color.classList.add("selected");
     }
     color.addEventListener("click", () => {
       const colors = document.querySelectorAll("#pen-color > li");
-      colors[currentIndex].classList.remove("selected");
-      currentIndex = index;
-      colors[currentIndex].classList.add("selected");
+      colors[selectedIndex].classList.remove("selected");
+      selectedIndex = index;
+      // console.log(index);
+      colors[selectedIndex].classList.add("selected");
     });
   });
   // ペンの太さのCSS
@@ -123,8 +127,10 @@
   penWidth.forEach((item, index) => {
     if (index === currentIndex) {
       item.classList.add("width-selected");
+      // console.log(index)
     }
     item.addEventListener("click", () => {
+      // item.classList.remove("width-selected");
       const li = document.querySelectorAll("#pen-width> li");
       li[currentIndex].classList.remove("width-selected");
       currentIndex = index;
@@ -133,15 +139,39 @@
   });
 
   // 要素の作成
-  function newGallery(id, img) {
+  function newGallery() {
     let createImg = document.createElement("img");
-    createImg.setAttribute("width", "100");
-    createImg.setAttribute("height", "50");
+    createImg.width = 100;
+    createImg.height = 50;
     createImg.src = canvas.toDataURL();
     createImg.classList.add("thumbnail");
 
-    // ダウンロード機能(1/2)=================================
-    // 囲ってある範囲内のチェックお願いします
+    const thumbnails = document.querySelectorAll("#gallery > img");
+    thumbnails.forEach((item, index) => {
+      index++;
+
+      createImg.addEventListener("click", () => {
+        createImg.classList.add("active");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(createImg, 0, 0, canvas.width, canvas.height);
+        const thumbnails = document.querySelectorAll("div > img");
+        thumbnails[galleryIndex].classList.remove("active");
+        galleryIndex = index;
+        thumbnails[galleryIndex].classList.add("active");
+      });
+      console.log(index);
+
+      // thumbnails[currentIndex].classList.remove("active");
+      // currentIndex = index;
+      // li[currentIndex].classList.add("active");
+    });
+    createImg.addEventListener("dblclick", () => {
+      if (!confirm("ダウンロードしますか？")) {
+        return;
+      }
+      a.click();
+    });
+
     a = document.createElement("a");
     a.href = canvas
       .toDataURL()
@@ -150,44 +180,28 @@
     a.download = "image.png";
     document.querySelector("#gallery").appendChild(a.appendChild(createImg));
     // a.click();
+
+    // item.addEventListener("click", () => {
+    //   // image要素の内容にcanvasを塗り替え
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   ctx.drawImage(item, 0, 0, canvas.width, canvas.height);
+    //   const thumbnails = document.querySelectorAll("div > img");
+    //   thumbnails[currentIndex].classList.remove("active");
+    //   currentIndex = index;
+    //   thumbnails[currentIndex].classList.add("active");
+    // });
+    // ダウンロード機能(2/2)=================================
+    // 囲ってある範囲内のチェックお願いします
+    // item.addEventListener("dblclick", () => {
+    //   if (!confirm("ダウンロードしますか？")) {
+    //     return;
+    //   } else {
+    //     a.click();
+    //   }
+    // });
     // =====================================================
-
-    obj = [
-      // id:Math.floor(Math.random()*10000),
-      // img:canvas.toDataURL()
-    ];
-    const all = document.querySelectorAll("div > img");
-
-    all.forEach((item, index) => {
-      (id = Math.floor(Math.random() * 10000)), (img = canvas.toDataURL());
-      obj.push({ id, img });
-
-      if (index === currentIndex) {
-        item.classList.add("active");
-      }
-
-      item.addEventListener("click", () => {
-        // image要素の内容にcanvasを塗り替え
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(item, 0, 0, canvas.width, canvas.height);
-        const thumbnails = document.querySelectorAll("div > img");
-        thumbnails[currentIndex].classList.remove("active");
-        currentIndex = index;
-        thumbnails[currentIndex].classList.add("active");
-      });
-      // ダウンロード機能(2/2)=================================
-      // 囲ってある範囲内のチェックお願いします
-      item.addEventListener("dblclick", () => {
-        if (!confirm("ダウンロードしますか？")) {
-          return;
-        } else {
-          a.click();
-        }
-      });
-      // =====================================================
-    });
-    // localStorage.setItem("canvas", JSON.stringify(obj));
   }
+  // localStorage.setItem("canvas", JSON.stringify(obj));
 
   add.addEventListener("click", () => {
     newGallery();
@@ -201,6 +215,7 @@
   img.src = localStorage.getItem("canvas");
   ctx.drawImage(img, 0, 0);
 }
+
 // メモ
 // {
 //   const canvas = document.querySelector("#canvas");
