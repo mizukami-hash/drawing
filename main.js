@@ -139,37 +139,40 @@
   });
 
   // 要素の作成
-  function newGallery() {
-    let createImg = document.createElement("img");
-    createImg.width = 100;
-    createImg.height = 50;
-    createImg.src = canvas.toDataURL();
-    createImg.classList.add("thumbnail");
+  function createNewImg() {
+    const newImg = document.createElement("img");
+    newImg.width = 100;
+    newImg.height = 50;
+    newImg.src = canvas.toDataURL();
+    newImg.classList.add("thumbnail");
 
     const thumbnails = document.querySelectorAll("#gallery > img");
     thumbnails.forEach((item, index) => {
       index++;
 
-      createImg.addEventListener("click", () => {
-        createImg.classList.add("active");
+      newImg.addEventListener("click", () => {
+        newImg.classList.add("active");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(createImg, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
         const thumbnails = document.querySelectorAll("div > img");
         thumbnails[galleryIndex].classList.remove("active");
         galleryIndex = index;
         thumbnails[galleryIndex].classList.add("active");
       });
       console.log(index);
-
-      // thumbnails[currentIndex].classList.remove("active");
-      // currentIndex = index;
-      // li[currentIndex].classList.add("active");
     });
-    createImg.addEventListener("dblclick", () => {
+
+    newImg.addEventListener("dblclick", () => {
       if (!confirm("ダウンロードしますか？")) {
         return;
       }
-      a.click();
+      ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+      // const thumbnails = document.querySelectorAll("div > img");
+      // thumbnails[galleryIndex].classList.remove("active");
+      // galleryIndex = index;
+      // thumbnails[galleryIndex].classList.add("active");
+
+      a.click(thumbnails[galleryIndex]);
     });
 
     a = document.createElement("a");
@@ -178,7 +181,8 @@
       .replace("image/png", "application/octet-stream");
     // ファイル名の指定
     a.download = "image.png";
-    document.querySelector("#gallery").appendChild(a.appendChild(createImg));
+    document.querySelector("#gallery").appendChild(a.appendChild(newImg));
+    // console.log(a);
     // a.click();
 
     // item.addEventListener("click", () => {
@@ -204,7 +208,7 @@
   // localStorage.setItem("canvas", JSON.stringify(obj));
 
   add.addEventListener("click", () => {
-    newGallery();
+    createNewImg();
   });
 
   save.addEventListener("click", () => {
