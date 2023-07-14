@@ -146,9 +146,11 @@
     newImg.src = canvas.toDataURL();
     newImg.classList.add("thumbnail");
 
+    gallery.appendChild(newImg);
+
     const thumbnails = document.querySelectorAll("#gallery > img");
     thumbnails.forEach((item, index) => {
-      index++;
+      // index++;
 
       newImg.addEventListener("click", () => {
         newImg.classList.add("active");
@@ -158,54 +160,24 @@
         thumbnails[galleryIndex].classList.remove("active");
         galleryIndex = index;
         thumbnails[galleryIndex].classList.add("active");
-      });
-      console.log(index);
-    });
+      }); /*閉じタグ newImg.addEventListener "click"*/
+    }); /*閉じタグ forEach*/
 
     newImg.addEventListener("dblclick", () => {
       if (!confirm("ダウンロードしますか？")) {
         return;
       }
-      ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-      // const thumbnails = document.querySelectorAll("div > img");
-      // thumbnails[galleryIndex].classList.remove("active");
-      // galleryIndex = index;
-      // thumbnails[galleryIndex].classList.add("active");
+      a = document.createElement("a");
+      a.href = canvas
+        .toDataURL()
+        .replace("image/png", "application/octet-stream");
+      // ファイル名の指定
+      a.download = "image.png";
+      newImg.appendChild(a);
 
-      a.click(thumbnails[galleryIndex]);
-    });
-
-    a = document.createElement("a");
-    a.href = canvas
-      .toDataURL()
-      .replace("image/png", "application/octet-stream");
-    // ファイル名の指定
-    a.download = "image.png";
-    document.querySelector("#gallery").appendChild(a.appendChild(newImg));
-    // console.log(a);
-    // a.click();
-
-    // item.addEventListener("click", () => {
-    //   // image要素の内容にcanvasを塗り替え
-    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //   ctx.drawImage(item, 0, 0, canvas.width, canvas.height);
-    //   const thumbnails = document.querySelectorAll("div > img");
-    //   thumbnails[currentIndex].classList.remove("active");
-    //   currentIndex = index;
-    //   thumbnails[currentIndex].classList.add("active");
-    // });
-    // ダウンロード機能(2/2)=================================
-    // 囲ってある範囲内のチェックお願いします
-    // item.addEventListener("dblclick", () => {
-    //   if (!confirm("ダウンロードしますか？")) {
-    //     return;
-    //   } else {
-    //     a.click();
-    //   }
-    // });
-    // =====================================================
+      a.click();
+    }); /*閉じタグ newImg.addEventListener "dblclick"*/
   }
-  // localStorage.setItem("canvas", JSON.stringify(obj));
 
   add.addEventListener("click", () => {
     createNewImg();
