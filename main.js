@@ -13,7 +13,7 @@
   let startY;
   let goalX;
   let goalY;
-  const marginWidth = 50;
+  const marginWidth = 100;
   let ctx;
   let isDrawing = false;
   let currentIndex = 0;
