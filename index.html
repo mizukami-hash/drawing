@@ -3,47 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300&family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300&family=Sawarabi+Gothic&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>お絵描きアプリ</title>
   </head>
   <body>
-<div class="container">
-  <canvas width="400" height="350" id="canvas"></canvas>
-  <div class="pen-style">
-      <p><img src="pen.png" alt="">ペンのスタイル選択</p>
-    <!-- <p>色</p> -->
-    <ul id="pen-color">
-      <li class="color" id="black"></li>
-      <li class="color" id="red"></li>
-      <li class="color" id="yellow"></li>
-      <li class="color" id="blue"></li>
-    </ul>
-    <!-- <p>太さ</p> -->
-    <ul id="pen-width">
-      <li class="width" id="one">1px</li>
-      <li class="width" id="three">3px</li>
-      <li class="width" id="five">5px</li>
-    </ul>
-    <p><img src="eraser.png" alt="消しゴム">消しゴム</p>
-    <button id="small-eraser" class="eraser">小</button>
-    <button id="big-eraser" class="eraser">大</button>
-  </div>
-</div>
-<div class="btn">
-  <button id="save">編集中の画像を保存</button>
-  <button id="clear">編集中の画像を消去</button>
-  <button id="add">ギャラリーに追加</button>
-  </div>
+    <div class="container">
+      <canvas width="400" height="350" id="canvas"></canvas>
+      <div class="pen-style">
+        <p><img src="pen.png" alt="ペン" />ペンのスタイル選択</p>
+        <!-- <p>色</p> -->
+        <ul id="pen-color">
+          <li class="color" id="black"></li>
+          <li class="color" id="red"></li>
+          <li class="color" id="yellow"></li>
+          <li class="color" id="blue"></li>
+        </ul>
+        <!-- <p>太さ</p> -->
+        <ul id="pen-width">
+          <li class="width" id="one">1px</li>
+          <li class="width" id="three">3px</li>
+          <li class="width" id="five">5px</li>
+        </ul>
+        <p><img src="eraser.png" alt="消しゴム" />消しゴム</p>
+        <button id="small-eraser" class="eraser">小</button>
+        <button id="big-eraser" class="eraser">大</button>
+      </div>
+    </div>
+    <div class="btn">
+      <button id="save">編集中の画像を保存</button>
+      <button id="clear">編集中の画像を消去</button>
+      <button id="add">ギャラリーに追加</button>
+    </div>
 
     <div id="gallery">
-      <p>ギャラリー</p>
+      <p>ギャラリー　※ダブルクリックでダウンロード</p>
       <!-- <img src="" alt="" /> -->
       <!-- <img id="ex" class="active" > -->
       <!-- <button id ="add">追加</button>   -->
-  
     </div>
 
     <script src="main.js"></script>
